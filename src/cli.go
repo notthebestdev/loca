@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+
 	root, _ := os.Getwd()
 
 	var ig *ignore.GitIgnore
@@ -49,5 +50,9 @@ func main() {
 		return
 	}
 
-	fmt.Printf("\n📊 Total lignes de code humain : %d\n\n", total)
+	fmt.Printf("\n\033[1m📊 You have written: %d lines!\033[0m\n", total)
+	if phrase := getRandomPhrase(total); phrase != "" {
+		fmt.Printf("\033[3m%s\033[0m\n", phrase)
+	}
+	fmt.Printf("\n")
 }
