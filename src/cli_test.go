@@ -10,9 +10,19 @@ func TestCountLines(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.Remove(tmp.Name())
+	defer func() {
+		if err := tmp.Close(); err != nil {
+			t.Error(err)
+		}
+		if err := os.Remove(tmp.Name()); err != nil {
+			t.Error(err)
+		}
+	}()
 
-	tmp.WriteString("line 1\nline 2\nline 3\n")
+	_, err = tmp.WriteString("line 1\nline 2\nline 3\n")
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	lines := countLines(tmp.Name())
 
