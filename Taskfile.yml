@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  build:
+    cmds:
+      - go build -o loca ./src 
+    desc: Build the Go application
+
+  test:
+    cmds:
+      - go test ./...
+    desc: Run all tests
+
+  lint:
+    cmds:
+      - golangci-lint run
+    desc: Lint the Go codebase
+
+  clean:
+    cmds:
+      - rm -f loca
+    desc: Clean the build artifacts
